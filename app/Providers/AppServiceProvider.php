@@ -23,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ( app()->runningInConsole() )
+            return;
+
+        dd(
+            url()->current(),
+            request()->segments()
+        );
     }
 }
