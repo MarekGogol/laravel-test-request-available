@@ -31,7 +31,8 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/one/two')
-                    ->assertSee('http://localhost:8000/one/two');
+                    ->assertSee('http://localhost:8000/one/two')
+                    ->pause(5000);
         });
     }
 }
