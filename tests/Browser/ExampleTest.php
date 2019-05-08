@@ -2,12 +2,26 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class ExampleTest extends DuskTestCase
 {
+    protected function baseUrl()
+    {
+        return 'localhost:8000';
+    }
+
+    protected function driver()
+    {
+        return RemoteWebDriver::create(
+            'http://localhost:9515', DesiredCapabilities::chrome()
+        );
+    }
+
     /**
      * A basic browser test example.
      *
@@ -16,8 +30,8 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Laravel');
+            $browser->visit('/one/two')
+                    ->assertSee('http://localhost:8000/one/two');
         });
     }
 }
